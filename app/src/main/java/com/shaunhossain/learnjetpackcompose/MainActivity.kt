@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -17,7 +18,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TestColumn(firstString = "hello", secondString = "word")
+            //TestColumn(firstString = "hello", secondString = "word")
+            TestRow(firstString = "hello", secondString = "word")
         }
     }
 }
@@ -25,6 +27,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TestColumn(firstString: String, secondString: String){
     Column() {
+        Text(firstString)
+        Text(secondString)
+    }
+}
+
+@Composable
+fun TestRow(firstString: String, secondString: String){
+    Row() {
         Text(firstString)
         Text(secondString)
     }
@@ -39,6 +49,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     LearnJetpackComposeTheme {
-        TestColumn("Hello","word")
+        TestRow("Hello"," word")
     }
 }
