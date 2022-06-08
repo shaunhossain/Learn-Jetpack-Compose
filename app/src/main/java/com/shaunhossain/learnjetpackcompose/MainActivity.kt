@@ -1,17 +1,16 @@
 package com.shaunhossain.learnjetpackcompose
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.shaunhossain.learnjetpackcompose.ui.theme.LearnJetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,16 +24,31 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun TestColumn(firstString: String, secondString: String){
-    Column() {
+fun TestColumn(firstString: String, secondString: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Green),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+
+    ) {
         Text(firstString)
         Text(secondString)
     }
 }
 
 @Composable
-fun TestRow(firstString: String, secondString: String){
-    Row() {
+fun TestRow(firstString: String, secondString: String) {
+    Row(
+        modifier = Modifier
+            //.width(200.dp)
+            .height(50.dp)
+            .background(Color.Green)
+            .fillMaxWidth(0.5f),
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.Top
+    ) {
         Text(firstString)
         Text(secondString)
     }
@@ -49,6 +63,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     LearnJetpackComposeTheme {
-        TestRow("Hello"," word")
+        TestRow("Hello", " word")
     }
 }
