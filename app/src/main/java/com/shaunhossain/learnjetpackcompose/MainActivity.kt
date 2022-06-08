@@ -42,8 +42,9 @@ fun TestColumn(firstString: String, secondString: String) {
 fun TestRow(firstString: String, secondString: String) {
     Row(
         modifier = Modifier
-            //.width(200.dp)
+            //.requiredWidth(200.dp)
             .height(50.dp)
+            .padding(16.dp)
             .background(Color.Green)
             .fillMaxWidth(0.5f),
         horizontalArrangement = Arrangement.SpaceAround,
