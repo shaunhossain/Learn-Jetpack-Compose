@@ -1,77 +1,88 @@
 package com.shaunhossain.learnjetpackcompose
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import com.shaunhossain.learnjetpackcompose.ui.theme.LearnJetpackComposeTheme
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TestColumn(firstString = "Click", secondString = "word")
-            //TestRow(firstString = "hello", secondString = "word")
+            val painter = painterResource(id = R.drawable.dog)
+            val contentDescription = "Puppy"
+            val title = "Puppy is asking for bone"
+            Column() {
+                TopAppBar() {
+                    Text(text = "Dog")
+                }
+                Box(modifier = Modifier.fillMaxSize(0.5f)) {
+                    ImageCard(painter = painter, title = title, contentDescription = contentDescription)
+                }
+            }
         }
     }
-}
 
-@Composable
-fun TestColumn(firstString: String, secondString: String){
-    Column(
-        modifier = Modifier
-            .background(Color.Blue)
-            .fillMaxSize()
-            .border(width = 5.dp, Color.White)
-            .padding(horizontal = 10.dp, vertical = 10.dp)
-            .border(width = 5.dp, Color.White)
-            .border(width = 2.dp, color = Color.Red)
-            .padding(horizontal = 10.dp, vertical = 10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(firstString, modifier = Modifier
-            .background(Color.Cyan)
-            .padding(10.dp)
-            .clickable {
+    @Composable
+    fun ImageCard(
+        painter: Painter,
+        title: String,
+        contentDescription: String,
+        modifier: Modifier = Modifier
+    ){
+        Card(
+            modifier = Modifier
+                .padding(15.dp)
+                .fillMaxSize(),
+            shape = RoundedCornerShape(15.dp),
+            elevation = 5.dp
+        ) {
+            Box(
+                modifier = Modifier
+                    .height(200.dp
+                    )){
+                Image(painter = painter, contentDescription = contentDescription, contentScale = ContentScale.Crop)
+            }
 
-        })
-        Spacer(modifier = Modifier.height(50.dp))
-        Text(secondString)
+            Box(modifier = Modifier
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color.Transparent,
+                            Color.Black
+                        ),
+                        startY = 300f
+                    )
+                )
+                .fillMaxSize()) {
+
+            }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(15.dp),
+                contentAlignment = Alignment.BottomCenter
+            ){
+                Text(title, style = TextStyle(color = Color.White, fontSize = 16.sp))
+            }
+        }
     }
-}
 
-@Composable
-fun TestRow(firstString: String, secondString: String){
-    Row() {
-        Text(firstString)
-        Text(secondString)
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = name)
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    LearnJetpackComposeTheme {
-        TestRow("Hello"," word")
-    }
 }
