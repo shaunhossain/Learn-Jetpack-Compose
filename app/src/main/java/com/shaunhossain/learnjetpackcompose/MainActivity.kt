@@ -1,4 +1,5 @@
 package com.shaunhossain.learnjetpackcompose
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,24 +18,54 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val fontFamily = FontFamily(
+            Font(R.font.fascinate_regular, FontWeight.Normal)
+        )
         super.onCreate(savedInstanceState)
         setContent {
-            val painter = painterResource(id = R.drawable.dog)
-            val contentDescription = "Puppy"
-            val title = "Puppy is asking for bone"
-            Column() {
-                TopAppBar() {
-                    Text(text = "Dog")
-                }
-                Box(modifier = Modifier.fillMaxSize(0.5f)) {
-                    ImageCard(painter = painter, title = title, contentDescription = contentDescription)
-                }
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Blue)
+            ) {
+                Text(
+                    buildAnnotatedString {
+                                         withStyle(style = SpanStyle(
+                                             color = Color.Green,
+                                             fontSize = 50.sp
+                                         )){
+                                             append("H")
+                                         }
+                        append("ello")
+                        withStyle(style = SpanStyle(
+                            color = Color.Green,
+                            fontSize = 50.sp
+                        )){
+                            append("S")
+                        }
+                        append("haun")
+                    },
+                    style = TextStyle(
+                        color = Color.White,
+                        fontSize = 30.sp,
+                        fontFamily = fontFamily
+                    ),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(10.dp)
+                )
             }
         }
     }
@@ -45,7 +76,7 @@ class MainActivity : ComponentActivity() {
         title: String,
         contentDescription: String,
         modifier: Modifier = Modifier
-    ){
+    ) {
         Card(
             modifier = Modifier
                 .padding(15.dp)
@@ -55,22 +86,30 @@ class MainActivity : ComponentActivity() {
         ) {
             Box(
                 modifier = Modifier
-                    .height(200.dp
-                    )){
-                Image(painter = painter, contentDescription = contentDescription, contentScale = ContentScale.Crop)
+                    .height(
+                        200.dp
+                    )
+            ) {
+                Image(
+                    painter = painter,
+                    contentDescription = contentDescription,
+                    contentScale = ContentScale.Crop
+                )
             }
 
-            Box(modifier = Modifier
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            Color.Transparent,
-                            Color.Black
-                        ),
-                        startY = 300f
+            Box(
+                modifier = Modifier
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Color.Transparent,
+                                Color.Black
+                            ),
+                            startY = 300f
+                        )
                     )
-                )
-                .fillMaxSize()) {
+                    .fillMaxSize()
+            ) {
 
             }
 
@@ -79,7 +118,7 @@ class MainActivity : ComponentActivity() {
                     .fillMaxSize()
                     .padding(15.dp),
                 contentAlignment = Alignment.BottomCenter
-            ){
+            ) {
                 Text(title, style = TextStyle(color = Color.White, fontSize = 16.sp))
             }
         }
